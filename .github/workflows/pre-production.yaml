@@ -17,7 +17,7 @@ jobs:
       - name: 🚀 启动虚拟机
         run: |
           echo "测试能否联通宿主机？"
-          ping -c 3 baidu.com
+          curl -I https://www.baidu.com
 
       - name: 配置环境
         run: |
