@@ -1,0 +1,94 @@
+name: 🚀 本地虚拟机部署 VitePress 笔记文档
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/docs/**' # 仅docs目录代码变更触发
+      - '.github/workflows/deploy.yml' # 配置文件变更触发
+
+# 全局环境变量（统一管理路径/配置）
+env:
+  # VitePress 子项目路径
+  DOCS_DIR: apps/docs
+  # 构建输出目录（VitePress 默认构建到 .vitepress/dist）
+  BUILD_DIR: apps/docs/.vitepress/dist
+  # 虚拟机本地部署目录（可自定义，建议放在nginx/html下）
+  DEPLOY_PATH: /usr/share/nginx/html/docs
+  # 虚拟机Nginx服务重启命令（适配红帽8/CentOS）
+  NGINX_RESTART_CMD: sudo systemctl restart nginx
+
+jobs:
+  # ======================== 第一步：构建 VitePress 文档 ========================
+  build-docs:
+    # 指定使用本地自托管Runner（核心！不走GitHub云端）
+    runs-on: self-hosted
+    # 可选：若Runner配置了标签，可精准指定（如runs-on: [self-hosted, rhel8]）
+
+    steps:
+      - name: 📥 拉取仓库代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 拉取完整提交记录（VitePress可能用到git信息）
+
+      - name: 🟢 配置 Node.js 环境（适配VitePress，建议18+/20+）
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          # 缓存docs目录的依赖，加速安装
+          cache-dependency-path: ${{ env.DOCS_DIR }}/package-lock.json
+
+      - name: 📦 安装 VitePress 依赖
+        run: |
+          # 进入docs目录安装依赖
+          cd ${{ env.DOCS_DIR }}
+          npm install
+
+      - name: 🔨 构建 VitePress 静态文档
+        run: |
+          cd ${{ env.DOCS_DIR }}
+          npm run build  # VitePress 默认构建命令（package.json需配置）
+          # 验证构建产物是否存在
+          ls -la ${{ env.BUILD_DIR }} || echo "⚠️ 构建目录不存在，请检查命令"
+
+      - name: 📤 保存构建产物（供部署步骤使用）
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-build
+          path: ${{ env.BUILD_DIR }}
+          retention-days: 1 # 产物仅保留1天，节省空间
+
+  # ======================== 第二步：部署到虚拟机本地目录 ========================
+  deploy-local:
+    needs: build-docs # 依赖构建步骤完成
+    runs-on: self-hosted # 同样使用本地Runner
+
+    steps:
+      - name: 📥 下载构建产物
+        uses: actions/download-artifact@v4
+        with:
+          name: docs-build
+          path: ${{ env.BUILD_DIR }}
+
+      - name: 📂 初始化部署目录（创建/清空）
+        run: |
+          # 创建部署目录（不存在则创建）
+          sudo mkdir -p ${{ env.DEPLOY_PATH }}
+          # 清空旧文档（避免缓存）
+          sudo rm -rf ${{ env.DEPLOY_PATH }}/*
+          echo "✅ 部署目录初始化完成：${{ env.DEPLOY_PATH }}"
+
+      - name: 📤 复制构建产物到部署目录
+        run: |
+          # 复制dist目录下所有文件到部署目录
+          sudo cp -r ${{ env.BUILD_DIR }}/* ${{ env.DEPLOY_PATH }}/
+          # 修复目录权限（避免Nginx访问报错）
+          sudo chown -R nginx:nginx ${{ env.DEPLOY_PATH }}
+          sudo chmod -R 755 ${{ env.DEPLOY_PATH }}
+          echo "✅ 产物已复制到部署目录"
+
+      - name: 🚀 重启 Nginx 生效
+        run: |
+          # 尝试重启Nginx，失败则提示（避免因Nginx未装导致流程中断）
+          ${{ env.NGINX_RESTART_CMD }} || echo "⚠️ Nginx未安装/启动失败，可手动重启"
+          echo "🎉 部署完成！访问 http://192.168.106.133/docs 查看文档"
