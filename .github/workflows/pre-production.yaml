@@ -37,5 +37,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: apps/docs/.vitepress/dist
+          folder: apps/docs/dist
           commit-message: '🚀 预生产部署'
