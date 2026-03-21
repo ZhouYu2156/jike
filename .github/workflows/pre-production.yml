@@ -24,9 +24,9 @@ env:
 jobs:
   # ======================== 第一步：构建 VitePress 文档 ========================
   build-docs:
+    name: 🚀 本地虚拟机部署 VitePress 笔记文档
     # 指定使用本地自托管Runner（核心！不走GitHub云端）
     runs-on: self-hosted
-    # 可选：若Runner配置了标签，可精准指定（如runs-on: [self-hosted, rhel8]）
 
     steps:
       - name: 📥 拉取仓库代码
@@ -36,6 +36,7 @@ jobs:
         run: |
           # 进入docs目录安装依赖
           cd ${{ env.DOCS_DIR }}
+          npm install -g pnpm
           pnpm i
           pnpm build
 
