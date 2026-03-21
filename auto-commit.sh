@@ -44,6 +44,6 @@ echo "正在提交更改..."
 git commit -m "$COMMIT_MESSAGE"
 
 echo "正在推送到远程仓库..."
-git push
+git push githubware main
 
 echo "✓ 提交完成！"
