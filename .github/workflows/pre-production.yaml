@@ -30,4 +30,11 @@ jobs:
       - name: 📦 安装依赖并运行
         run: |
           pnpm i
-          pnpm dev
+          pnpm docs:dev
+
+      - name: 🚀 部署
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
+          commit-message: '🚀 预生产部署'
