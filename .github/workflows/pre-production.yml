@@ -3,8 +3,9 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/docs/**' # 仅docs目录代码变更触发
-      - '.github/workflows/deploy.yml' # 配置文件变更触发
+      - 'apps/**' # 仅docs目录代码变更触发
+      - 'packages/**'
+      - '.github/workflows/pre-production.yml' # 配置文件变更触发
 
 # 全局环境变量（统一管理路径/配置）
 env:
@@ -47,7 +48,7 @@ jobs:
       - name: 🔨 构建 VitePress 静态文档
         run: |
           cd ${{ env.DOCS_DIR }}
-          npm run build  # VitePress 默认构建命令（package.json需配置）
+          pnpm docs:build  # VitePress 默认构建命令（package.json需配置）
           # 验证构建产物是否存在
           ls -la ${{ env.BUILD_DIR }} || echo "⚠️ 构建目录不存在，请检查命令"
 
