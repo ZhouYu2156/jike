@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: 🚀 启动虚拟机
         run: |
-          echo "测试能否联通宿主机？？？"
+          echo "测试能否联通宿主机？"
           ping -c 3 192.168.0.101
 
       - name: ⬇️ Checkout
