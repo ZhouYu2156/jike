@@ -21,5 +21,13 @@ jobs:
       - name: ⬇️ Checkout
         uses: actions/checkout@v4
 
-      - name: 📦 安装依赖
-        run: pnpm dev
+      - name: 配置环境
+        run: |
+          node -v
+          npm i -g pnpm
+          pnpm -v
+
+      - name: 📦 安装依赖并运行
+        run: |
+          pnpm i
+          pnpm dev
