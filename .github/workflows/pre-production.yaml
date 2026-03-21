@@ -18,14 +18,20 @@ jobs:
           echo "测试能否联通宿主机？"
           ping -c 3 192.168.0.101
 
-      - name: ⬇️ Checkout
-        uses: actions/checkout@v4
+      - name: 🟢 配置 Node.js 环境（强制使用最新版）
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*' # 指定大版本（如20/18，会自动拉取最新小版本）
+          check-latest: true # 核心：强制检查并下载最新版本，忽略本地旧版本
 
       - name: 配置环境
         run: |
           node -v
           npm i -g pnpm
           pnpm -v
+
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v4
 
       - name: 📦 安装依赖并运行
         run: |
