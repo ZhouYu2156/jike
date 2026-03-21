@@ -5,11 +5,19 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: 构建
     runs-on: self-hosted
     steps:
+      - name: 🚀 启动虚拟机
+        run: |
+          echo "测试能否联通宿主机？？？"
+          ping 192.168.0.101
+
       - name: ⬇️ Checkout
         uses: actions/checkout@v4
 
