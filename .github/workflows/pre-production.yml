@@ -7,6 +7,9 @@ on:
       - 'packages/**'
       - '.github/workflows/pre-production.yml' # 配置文件变更触发
 
+permissions:
+  contents: write
+
 # 全局环境变量（统一管理路径/配置）
 env:
   # VitePress 子项目路径
