@@ -23,6 +23,6 @@ export default defineConfig({
 
     socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
   },
-  base: '/jiketu/',
+  base: '/jike/',
   outDir: 'dist',
 })
