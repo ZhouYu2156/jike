@@ -28,27 +28,18 @@ jobs:
     steps:
       - name: 📥 拉取仓库代码
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # 拉取完整提交记录（VitePress可能用到git信息）
 
-      - name: 🟢 配置 Node.js 环境（适配VitePress，建议18+/20+）
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          # 缓存docs目录的依赖，加速安装
-          cache-dependency-path: ${{ env.DOCS_DIR }}/package-lock.json
-
-      - name: 📦 安装 VitePress 依赖
+      - name: 📦 安装依赖和项目打包
         run: |
           # 进入docs目录安装依赖
           cd ${{ env.DOCS_DIR }}
-          npm install
+          pnpm i
+          pnpm build
 
-      - name: 🔨 构建 VitePress 静态文档
+      - name: 🔨 构建静态文档
         run: |
           cd ${{ env.DOCS_DIR }}
-          pnpm docs:build  # VitePress 默认构建命令（package.json需配置）
+          pnpm docs:build
           # 验证构建产物是否存在
           ls -la ${{ env.BUILD_DIR }} || echo "⚠️ 构建目录不存在，请检查命令"
 
