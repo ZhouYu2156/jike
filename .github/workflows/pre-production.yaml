@@ -19,12 +19,6 @@ jobs:
           echo "测试能否联通宿主机？"
           ping -c 3 baidu.com
 
-      - name: 🟢 配置 Node.js 环境（强制使用最新版）
-        uses: actions/setup-node@v4
-        with:
-          node-version: 'lts/*'
-          check-latest: true
-
       - name: 配置环境
         run: |
           node -v
