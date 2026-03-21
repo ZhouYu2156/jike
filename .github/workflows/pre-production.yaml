@@ -37,6 +37,9 @@ jobs:
 
       - name: 📥 拉取仓库代码
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }} # 对应 Secrets 中的名称
 
       - name: 📦 安装依赖和项目打包
         run: |
