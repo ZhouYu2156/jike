@@ -10,19 +10,20 @@ permissions:
 
 jobs:
   build:
-    name: 构建
-    runs-on: self-hosted
+    name: 自动化发布个人博客📚
+    runs-on: ubuntu-latest
+
     steps:
       - name: 🚀 启动虚拟机
         run: |
           echo "测试能否联通宿主机？"
-          ping -c 3 192.168.0.101
+          ping -c 3 baidu.com
 
       - name: 🟢 配置 Node.js 环境（强制使用最新版）
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*' # 指定大版本（如20/18，会自动拉取最新小版本）
-          check-latest: true # 核心：强制检查并下载最新版本，忽略本地旧版本
+          node-version: 'lts/*'
+          check-latest: true
 
       - name: 配置环境
         run: |
