@@ -1,7 +1,8 @@
 name: 🚀 本地虚拟机部署 VitePress 笔记文档
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - 'apps/**' # 仅docs目录代码变更触发
       - 'packages/**'
@@ -29,6 +30,11 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      - name: 🔧 配置网络代理
+        run: |
+          export http_proxy=http://192.168.0.101:7890
+          export https_proxy=http://192.168.0.101:7890
+
       - name: 📥 拉取仓库代码
         uses: actions/checkout@v4
 
