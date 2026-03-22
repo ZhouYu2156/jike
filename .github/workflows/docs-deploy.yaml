@@ -19,6 +19,7 @@ jobs:
 
       - name: 安装依赖并构建生产版本⚡️
         run: |
+          npm i -g pnpm
           pnpm -F @jiketu/docs i
           pnpm run docs:build
 
