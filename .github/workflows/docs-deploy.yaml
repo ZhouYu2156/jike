@@ -1,4 +1,4 @@
-name: deploy knowledge notes blog
+name: 知识文档部署📡
 
 on:
   push:
@@ -8,18 +8,24 @@ on:
 permissions:
   contents: write
 
+run-name: 知识文档部署📚
 jobs:
   deploy-notes:
-    name: 知识笔记部署📚
+    name: 部署流程 steps♻️
     runs-on: ubuntu-latest
 
     steps:
       - name: 检出代码🔍️
         uses: actions/checkout@v4
 
+      - name: 配置环境🔨
+        run: |
+          node -v
+          npm i -g pnpm
+          pnpm -v
+
       - name: 安装依赖并构建生产版本⚡️
         run: |
-          npm i -g pnpm
           pnpm -F @jiketu/docs i
           pnpm run docs:build
 
