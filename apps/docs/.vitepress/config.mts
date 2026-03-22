@@ -15,7 +15,7 @@ export default defineConfig({
   srcDir: 'src',
   // 输出目录
   outDir: 'dist',
-  base: '/jiketu/', // 统一资源 路径前缀
+  base: '/jike/', // 统一资源 路径前缀
   // 网站 head 配置: 做 SEO 优化
   head: [
     [
