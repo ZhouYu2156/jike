@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   deploy-notes:
-    name: 知识笔记部署
+    name: 知识笔记部署📚
     runs-on: ubuntu-latest
 
     steps:
