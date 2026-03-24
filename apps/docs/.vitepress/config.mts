@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { FILINGS, markdown, nav, search, sidebar, socialLinks } from './configuration'
+import { BASE_URL } from './utils'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -14,7 +15,7 @@ export default defineConfig({
   // 输出目录
   outDir: 'dist',
   // 统一资源 路径前缀
-  base: '/jike/',
+  base: BASE_URL,
   // 网站 head 配置: 做 SEO 优化
   head: [
     [
