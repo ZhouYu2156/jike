@@ -14,7 +14,7 @@ export default defineConfig({
   // 输出目录
   outDir: 'dist',
   // 统一资源 路径前缀
-  // base: '/jike/',
+  base: '/jike/',
   // 网站 head 配置: 做 SEO 优化
   head: [
     [

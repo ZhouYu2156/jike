@@ -4,9 +4,6 @@
   "description": "monorepo builded for jiketu",
   "main": "index.js",
   "type": "module",
-  "scripts": {
-    "docs:build": "vitepress build apps/docs"
-  },
   "keywords": [],
   "author": "",
   "license": "MIT",
