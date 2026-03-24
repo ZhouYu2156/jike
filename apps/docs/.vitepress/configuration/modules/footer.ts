@@ -1,5 +1,3 @@
-import { BASE_URL } from '../../utils'
-
 const ICP = '湘ICP备2024064075号-1'
 const POLICE = '湘公网安备43112402000148号'
 
@@ -9,7 +7,7 @@ export const FILINGS = `
                         justify-content: center;
                         align-items: center;
                         text-decoration-line: none;">
-                        <img src="${BASE_URL}备案/foot-icp.png" style="width: 20px;
+                        <img src="/jike/备案/foot-icp.png" style="width: 20px;
                                                   height: 20px;
                                                   margin-right: 5px;" />
                         <span>${ICP}</span>
@@ -18,7 +16,7 @@ export const FILINGS = `
                         justify-content: center;
                         align-items: center;
                         text-decoration-line: none;">
-                        <img src="${BASE_URL}备案/logo-police.png" style="width: 20px;
+                        <img src="/jike/备案/logo-police.png" style="width: 20px;
                                                     height: 20px;
                                                     margin-right: 5px;" />
                         <span>${POLICE}</span>
