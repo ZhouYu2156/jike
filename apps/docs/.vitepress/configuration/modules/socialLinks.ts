@@ -1,3 +1,5 @@
+import { BASE_URL } from '../../utils'
+
 interface SocialLink {
   icon: SocialLinkIcon
   link: string
@@ -21,25 +23,25 @@ type SocialLinkIcon =
 export const socialLinks: SocialLink[] = [
   {
     icon: {
-      svg: '<img class="social-link-icon" src="/social-icons/gitee.svg">',
+      svg: `<img class="social-link-icon" src="${BASE_URL}/social-icons/gitee.svg">`,
     },
     link: 'https://gitee.com/zhouyu2156',
   },
   {
     icon: {
-      svg: '<img class="social-link-icon" src="/social-icons/github.svg">',
+      svg: `<img class="social-link-icon" src="${BASE_URL}social-icons/github.svg">`,
     },
     link: 'https://github.com/ZhouYu2156',
   },
   {
     icon: {
-      svg: '<img class="social-link-icon" src="/social-icons/fish.png">',
+      svg: `<img class="social-link-icon" src="${BASE_URL}social-icons/fish.png">`,
     },
     link: 'https://www.zhouyu2156.cn/Programming/',
   },
   {
     icon: {
-      svg: '<img class="social-link-icon" src="/social-icons/bilibili.svg">',
+      svg: `<img class="social-link-icon" src="${BASE_URL}social-icons/bilibili.svg">`,
     },
     link: 'https://space.bilibili.com/431828034',
   },

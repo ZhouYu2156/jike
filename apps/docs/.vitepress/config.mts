@@ -22,7 +22,7 @@ export default defineConfig({
       'link',
       {
         rel: 'icon',
-        href: '/favicon.svg',
+        href: `${BASE_URL}favicon.svg`,
       },
     ],
   ],
@@ -46,8 +46,8 @@ export default defineConfig({
     logoLink: '/',
     // 网站logo图片
     logo: {
-      light: '/favicon.svg',
-      dark: '/favicon.svg',
+      light: `${BASE_URL}favicon.svg`,
+      dark: `${BASE_URL}favicon.svg`,
     },
     // 导航栏
     nav,
