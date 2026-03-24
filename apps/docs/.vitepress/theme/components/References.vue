@@ -34,7 +34,10 @@ const props = defineProps({
         target="_blank">
         <span style="padding: 2px 5px">{{ item.title }}</span>
         <span>
-          <img :src="item.icon" :alt="item.title" width="50" />
+          <img
+            :src="item.icon"
+            :alt="item.title"
+            width="50" />
         </span>
       </a>
     </div>

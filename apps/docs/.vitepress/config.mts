@@ -1,7 +1,5 @@
 import { defineConfig } from 'vitepress'
 import { FILINGS, markdown, nav, search, sidebar, socialLinks } from './configuration'
-// const nav = generateNav()
-// const sidebar = generateSidebar()
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -15,14 +13,15 @@ export default defineConfig({
   srcDir: 'src',
   // 输出目录
   outDir: 'dist',
-  base: '/jike/', // 统一资源 路径前缀
+  // 统一资源 路径前缀
+  // base: '/jike/',
   // 网站 head 配置: 做 SEO 优化
   head: [
     [
       'link',
       {
         rel: 'icon',
-        href: '/favicon.png',
+        href: '/favicon.svg',
       },
     ],
   ],
@@ -46,8 +45,8 @@ export default defineConfig({
     logoLink: '/',
     // 网站logo图片
     logo: {
-      light: '/rabbit.svg',
-      dark: '/rabbit-dark.svg',
+      light: '/favicon.svg',
+      dark: '/favicon.svg',
     },
     // 导航栏
     nav,

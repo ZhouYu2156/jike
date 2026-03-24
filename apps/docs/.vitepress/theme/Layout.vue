@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 import DefaultTheme, { VPDocAsideSponsors } from 'vitepress/theme'
-import { nextTick, onMounted, onUnmounted, provide, ref } from 'vue'
+import { onMounted, onUnmounted, provide, ref } from 'vue'
+import { useToggleTheme } from '../composables/toggleTheme'
 import MusicPlayer from './components/MusicPlayer.vue'
 import ThemeSelector from './components/ThemeSelector.vue'
 
@@ -31,25 +32,16 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
     isDark.value = !isDark.value
     return
   }
+  const transition = true // 开启渐变过渡
 
-  const clipPath = [
-    `circle(0px at ${x}px ${y}px)`,
-    `circle(${Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))}px at ${x}px ${y}px)`,
-  ]
-
-  await document.startViewTransition(async () => {
-    isDark.value = !isDark.value
-    await nextTick()
-  }).ready
-
-  document.documentElement.animate(
-    { clipPath: isDark.value ? clipPath.reverse() : clipPath },
-    {
-      duration: 300,
-      easing: 'ease-in',
-      pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`,
-    },
-  )
+  if (transition) {
+    // 渐熄模式
+    document.startViewTransition(async () => {
+      isDark.value = !isDark.value
+    })
+  } else {
+    useToggleTheme({ x, y, isDark })
+  }
 })
 </script>
 
@@ -111,11 +103,12 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 </template>
 
 <style>
-::view-transition-old(root),
-::view-transition-new(root) {
+/*::view-transition-new(root),
+::view-transition-old(root) {
   animation: none;
   mix-blend-mode: normal;
 }
+
 ::view-transition-old(root),
 .dark::view-transition-new(root) {
   z-index: 1;
@@ -124,5 +117,5 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 ::view-transition-new(root),
 .dark::view-transition-old(root) {
   z-index: 9999;
-}
+}*/
 </style>
