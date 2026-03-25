@@ -2318,9 +2318,7 @@ drwxr-xr-x.   2 root root    6 Dec 10 19:30 test
 - 请简述 RPM 和 YUM 的区别。
 
   :white_check_mark:：RPM（Red Hat Package Manager）和 YUM（Yellowdog Updater, Modified）是在 Linux 系统上用于软件包管理的两个相关但不同的工具。
-
   1. RPM（Red Hat Package Manager）:
-
      - RPM 是一种软件包管理系统，用于在 Red Hat 系列的 Linux 发行版（如 Red Hat Enterprise Linux、Fedora、CentOS 等）上安装、更新和卸载软件包。
      - RPM 主要关注于软件包的基本操作，例如安装、升级和卸载。它不自动解决软件包之间的依赖性问题，需要用户手动管理依赖关系。
      - RPM 格式的软件包通常以 .rpm 为扩展名。

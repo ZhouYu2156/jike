@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-import { FILINGS, markdown, nav, search, sidebar, socialLinks } from './configuration'
+import { markdown, nav, search, sidebar, socialLinks } from './configuration'
 import { BASE_URL } from './utils'
 
 // https://vitepress.dev/reference/site-config
@@ -43,12 +43,9 @@ export default defineConfig({
     // 深色模式标题
     darkModeSwitchTitle: '深色模式',
     // 网站logo跳转的链接
-    logoLink: '/',
+    logoLink: BASE_URL,
     // 网站logo图片
-    logo: {
-      light: `${BASE_URL}favicon.svg`,
-      dark: `${BASE_URL}favicon.svg`,
-    },
+    logo: '/favicon.svg',
     // 导航栏
     nav,
     // 侧边栏
@@ -69,7 +66,7 @@ export default defineConfig({
     },
     /* 编辑链接 */
     editLink: {
-      pattern: 'https://github.com/ZhouYu2156/docs',
+      pattern: 'https://github.com/ZhouYu2156/jike',
       text: '在 Github 上编辑此页',
     },
     // 文章大纲
@@ -90,18 +87,10 @@ export default defineConfig({
     },
     // 首页的页脚
     footer: {
-      message: FILINGS,
       copyright: 'Copyright © 2023 Created By Zhou Yu.',
     },
   },
   vite: {
-    build: {
-      chunkSizeWarningLimit: 1000 * 2,
-    },
-    server: {
-      host: true,
-      port: 5173,
-    },
     css: {
       preprocessorOptions: {
         scss: {

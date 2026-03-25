@@ -57,6 +57,8 @@ export function generateNav({
     参考文档: '📚',
     生活: '🏠',
     工作: '💼',
+    必会算法: '🧮️',
+    设计模式: '✏️',
     vue: `${BASE_URL}nav-icons/vue.png`,
     react: `${BASE_URL}nav-icons/react.png`,
     nestjs: `${BASE_URL}nav-icons/nestjs.png`,
@@ -93,7 +95,7 @@ export function generateNav({
     运维: '🛠️ 运维',
     设计: '🎨 设计',
     资源: '🧰 工具箱',
-    前沿领域: '🔥 前沿领域',
+    深入前沿: '🔎 深入前沿',
     写作: '📖 写作',
   },
 }: Partial<GenerateNavOptions> = {}): DefaultTheme.NavItem[] {

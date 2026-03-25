@@ -40,3 +40,18 @@ export async function useToggleTheme({ x, y, isDark }: { x: number; y: number; i
     },
   )
 }
+
+function moveZeroes(nums: number[]) {
+  let left = 0,
+    right = 0
+  while (right < nums.length) {
+    if (nums[right] !== 0) {
+      ;[nums[left], nums[right]] = [nums[right], nums[left]]
+      left++
+    }
+    right++
+  }
+
+  return nums
+}
+console.log(moveZeroes([0, 1, 0, 3, 12]))
